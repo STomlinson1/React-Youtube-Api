@@ -46,10 +46,10 @@ export default class App extends Component {
 					</div>
 					<div className="ui grid">
 						<div className="row">
-							<div className="ten wide column">
+							<div className="eleven wide column">
 								<VideoDetail video={this.state.selectedVideo} />
 							</div>
-							<div className="six wide column">
+							<div className="five wide column">
 								<VideoList
 									videos={this.state.videos}
 									onVideoSelect={this.onVideoSelect}

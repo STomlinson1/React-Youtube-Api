@@ -14,7 +14,7 @@ export default function VideoList(props) {
 	});
 
 	return (
-		<div id="video-list" className="ui relaxed divided list">
+		<div id="video-list" className="ui inverted relaxed divided list">
 			{renderedVideos}
 		</div>
 	);
