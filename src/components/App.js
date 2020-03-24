@@ -10,31 +10,53 @@ import VideoDetail from './VideoDetail';
 export default class App extends Component {
 	state = { videos: [], selectedVideo: null };
 
+	componentDidMount() {
+		this.onTermSubmit('Lebron James');
+	}
+
 	onTermSubmit = async (term) => {
 		const response = await youtube.get('/search', {
 			params : {
 				part       : 'snippet',
 				q          : term,
 				type       : 'video',
-				maxResults : '5',
+				maxResults : '7',
 				key        : KEY
 			}
 		});
 
-		this.setState({ videos: response.data.items });
-		console.log(this.state.videos);
+		this.setState({
+			videos        : response.data.items,
+			selectedVideo : response.data.items[0]
+		});
 	};
 
-	onVideoSelect = (video) => {};
+	onVideoSelect = (video) => {
+		this.setState({ selectedVideo: video });
+		console.log(this.state.selectedVideo);
+	};
 
 	render() {
 		return (
-			<div>
+			<div className="ui inverted segment basic" style={{ minHeight: '100vh' }}>
 				<Header />
 				<div className="ui container">
-					<SearchBar onTermSubmit={this.onTermSubmit} />
-
-					<VideoList videos={this.state.videos} />
+					<div className="ui segment basic">
+						<SearchBar onTermSubmit={this.onTermSubmit} />
+					</div>
+					<div className="ui grid">
+						<div className="row">
+							<div className="ten wide column">
+								<VideoDetail video={this.state.selectedVideo} />
+							</div>
+							<div className="six wide column">
+								<VideoList
+									videos={this.state.videos}
+									onVideoSelect={this.onVideoSelect}
+								/>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
 		);

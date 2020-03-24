@@ -9,12 +9,12 @@ export default function VideoItem(props) {
 		<div
 			className="item video-item"
 			onClick={() => {
-				console.log('Clicked');
+				props.onVideoSelect(props.video);
 			}}
 		>
-			<img className="ui image" src={snippet.thumbnails.medium.url} />
+			<img className="ui image" src={snippet.thumbnails.medium.url} alt={title} />
 			<div className="content">
-				<h4 className="Header">{title}</h4>
+				<h5 className="Header">{title}</h5>
 			</div>
 		</div>
 	);
